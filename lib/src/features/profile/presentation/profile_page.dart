@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../core/constants/app_constants.dart';
-import '../../../../shared/models/user_model.dart';
-import '../../../../shared/models/follow_model.dart';
-import '../../../../shared/providers/profile_provider.dart';
-import '../../../../shared/widgets/loading_widget.dart';
-import '../../../../shared/widgets/error_widget.dart';
-import '../../../../shared/widgets/avatar_widget.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/theme/app_typography.dart';
+import '../../../shared/models/user_model.dart';
+import '../../../shared/providers/profile_provider.dart';
+import '../../../shared/widgets/loading_widget.dart';
+import '../../../shared/widgets/error_widget.dart';
+import '../../../shared/widgets/avatar_widget.dart';
 import 'edit_profile_page.dart';
 import 'followers_page.dart';
 import 'following_page.dart';
@@ -185,7 +181,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            AppTheme.primaryColor.withOpacity(0.8),
+            AppTheme.primaryColor.withValues(alpha: 0.8),
             AppTheme.primaryColor,
           ],
         ),
@@ -217,7 +213,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
           // Username
           Text(
             '@${user.usernameOrEmail}',
-            style: AppTypography.body2.withColor(AppTheme.textSecondary),
+            style: AppTypography.withColor(AppTypography.body2, AppTheme.textSecondary),
           ),
 
           const SizedBox(height: 8),
@@ -280,7 +276,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: AppTheme.primaryColor.withOpacity(0.1),
+          color: AppTheme.primaryColor.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
@@ -294,7 +290,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
             const SizedBox(width: 4),
             Text(
               label,
-              style: AppTypography.caption2.withColor(AppTheme.primaryColor),
+              style: AppTypography.withColor(AppTypography.caption2, AppTheme.primaryColor),
             ),
           ],
         ),
@@ -403,7 +399,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
             const SizedBox(height: 4),
             Text(
               label,
-              style: AppTypography.body2.withColor(AppTheme.textSecondary),
+              style: AppTypography.withColor(AppTypography.body2, AppTheme.textSecondary),
             ),
           ],
         ),
@@ -416,13 +412,13 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
       delegate: _SliverTabBarDelegate(
         TabBar(
           controller: _tabController,
-          tabs: const [
+          tabs: [
             Tab(
-              icon: Icon(Icons.grid_on),
+              icon: const Icon(Icons.grid_on),
               text: 'Posts',
             ),
             Tab(
-              icon: Icon(Icons.tag),
+              icon: const Icon(Icons.tag),
               text: 'Tagged',
             ),
           ],
@@ -466,7 +462,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
     }
 
     // TODO: Implement tagged posts
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -475,15 +471,15 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
             size: 64,
             color: AppTheme.textSecondary,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(
             'Tagged posts',
             style: AppTypography.h1,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             'Posts where this user is tagged',
-            style: AppTypography.body1.withColor(AppTheme.textSecondary),
+            style: AppTypography.withColor(AppTypography.body1, AppTheme.textSecondary),
           ),
         ],
       ),
@@ -514,16 +510,14 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
   void _sendMessage() {
     // TODO: Implement messaging
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: 'Messaging feature coming soon!'),
+      const SnackBar(content: Text('Messaging feature coming soon!')),
     );
   }
 
   void _shareProfile() {
     // TODO: Implement profile sharing
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: 'Share feature coming soon!'),
+      const SnackBar(content: Text('Share feature coming soon!')),
     );
   }
 
@@ -553,8 +547,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
             onPressed: () {
               Navigator.of(context).pop();
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: 'User blocked successfully'),
+                const SnackBar(content: Text('User blocked successfully')),
               );
             },
             child: const Text('Block'),
@@ -579,8 +572,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
             onPressed: () {
               Navigator.of(context).pop();
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: 'Report submitted successfully'),
+                const SnackBar(content: Text('Report submitted successfully')),
               );
             },
             child: const Text('Report'),
@@ -593,8 +585,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
   void _openUrl(String url) {
     // TODO: Implement URL opening
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: 'URL opening coming soon!'),
+      const SnackBar(content: Text('URL opening coming soon!')),
     );
   }
 

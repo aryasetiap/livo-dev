@@ -1,5 +1,3 @@
-import 'app_theme.dart';
-
 class AppConstants {
   // App Information
   static const String appName = 'Livo';

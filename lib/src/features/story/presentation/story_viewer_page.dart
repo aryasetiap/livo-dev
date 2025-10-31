@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:video_player/video_player.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../shared/models/story_model.dart';
-import '../../../../shared/providers/story_provider.dart';
-import '../../../../shared/providers/auth_provider.dart';
-import '../../../../shared/widgets/avatar_widget.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/theme/app_typography.dart';
+import '../../../shared/models/story_model.dart';
+import '../../../shared/providers/story_provider.dart';
+import '../../../shared/providers/auth_provider.dart';
+import '../../../shared/widgets/avatar_widget.dart';
 import 'story_reply_bottom_sheet.dart';
 
 class StoryViewerPage extends ConsumerStatefulWidget {
@@ -279,7 +279,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage>
                   Text(
                     story.timeAgo,
                     style: AppTypography.caption2.copyWith(
-                      color: Colors.white.withOpacity(0.8),
+                      color: Colors.white.withValues(alpha: 0.8),
                     ),
                   ),
                 ],
@@ -317,14 +317,14 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage>
                   right: index < bundle.stories.length - 1 ? 2 : 0,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.3),
+                  color: Colors.white.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(2),
                 ),
                 child: Stack(
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.3),
+                        color: Colors.white.withValues(alpha: 0.3),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -369,7 +369,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage>
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.1),
+          color: Colors.white.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(30),
           backdropFilter: const ColorFilter.mode(
             Colors.white,
@@ -388,7 +388,7 @@ class _StoryViewerPageState extends ConsumerState<StoryViewerPage>
               child: Text(
                 'Send message',
                 style: AppTypography.body2.copyWith(
-                  color: Colors.white.withOpacity(0.8),
+                  color: Colors.white.withValues(alpha: 0.8),
                 ),
               ),
             ),

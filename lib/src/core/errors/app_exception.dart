@@ -1,4 +1,5 @@
 import '../constants/app_constants.dart';
+import 'dart:async';
 
 // Base exception class
 abstract class AppException implements Exception {
@@ -364,7 +365,7 @@ class ExceptionHandler {
     }
 
     // Handle generic exceptions
-    return AppException(
+    return _GenericAppException(
       AppConstants.genericErrorMessage,
       originalError: exception,
     );
@@ -381,5 +382,9 @@ class ExceptionHandler {
   }
 }
 
-// Import required types
-import 'dart:async';
+// Concrete implementation for generic exceptions
+class _GenericAppException extends AppException {
+  _GenericAppException(String message, {String? code, dynamic originalError})
+      : super(message, code: code, originalError: originalError);
+}
+

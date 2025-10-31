@@ -7,27 +7,29 @@ import 'package:image_picker/image_picker.dart';
 import '../core/constants/app_constants.dart';
 import '../core/config/environment_config.dart';
 import '../core/config/supabase_config.dart';
-import '../core/errors/app_exception.dart';
-import '../shared/models/user_model.dart';
+import '../shared/models/user_model.dart' as app_models;
 import '../shared/models/follow_model.dart';
+import '../core/errors/app_exception.dart';
 import 'supabase_service.dart';
 
 class ProfileService {
-  final SupabaseService _supabaseService = SupabaseService.instance;
-  final EnvironmentConfig _env = EnvironmentConfig.instance;
+  final SupabaseService _supabaseService;
+  final EnvironmentConfig _env;
+
+  ProfileService(this._supabaseService, this._env);
 
   // Get user profile by ID
-  Future<User?> getUserProfile(String userId) async {
+  Future<app_models.User?> getUserProfile(String userId) async {
     try {
       _env.log('Getting user profile: $userId', tag: 'ProfileService');
 
-      final response = await _supabaseService.database(SupabaseConfig.profilesTable)
+      final response = await _supabaseService.from(SupabaseConfig.profilesTable)
           .select()
           .eq('id', userId)
           .maybeSingle();
 
       if (response != null) {
-        final user = User.fromSupabaseUser(
+        final user = app_models.User.fromSupabaseUser(
           _supabaseService.auth.currentUser!,
           profileData: response,
         );
@@ -44,18 +46,18 @@ class ProfileService {
   }
 
   // Get multiple user profiles
-  Future<List<User>> getUserProfiles(List<String> userIds) async {
+  Future<List<app_models.User>> getUserProfiles(List<String> userIds) async {
     try {
       if (userIds.isEmpty) return [];
 
       _env.log('Getting ${userIds.length} user profiles', tag: 'ProfileService');
 
-      final response = await _supabaseService.database(SupabaseConfig.profilesTable)
+      final response = await _supabaseService.from(SupabaseConfig.profilesTable)
           .select()
           .in_('id', userIds);
 
       final users = response.map((profile) {
-        return User.fromSupabaseUser(
+        return app_models.User.fromSupabaseUser(
           _supabaseService.auth.currentUser!,
           profileData: profile,
         );

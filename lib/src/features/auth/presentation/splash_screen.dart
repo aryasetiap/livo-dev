@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../core/constants/app_constants.dart';
-import '../../../../shared/providers/auth_provider.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/theme/app_typography.dart';
+import '../../../core/constants/app_constants.dart';
+import '../../../shared/providers/auth_provider.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -210,7 +210,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2),
+                color: Colors.black.withValues(alpha: 0.2),
                 blurRadius: 20,
                 offset: const Offset(0, 10),
               ),
@@ -228,7 +228,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
         // App name
         Text(
           AppConstants.appName,
-          style: AppTypography.display3.withColor(Colors.white),
+          style: AppTypography.withColor(AppTypography.display3, Colors.white),
         ),
 
         const SizedBox(height: 8),
@@ -236,7 +236,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
         // Tagline
         Text(
           'Share Your Moments',
-          style: AppTypography.body1.withColor(Colors.white.withOpacity(0.9)),
+          style: AppTypography.withColor(AppTypography.body1, Colors.white.withValues(alpha: 0.9)),
         ),
       ],
     );
@@ -257,7 +257,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
         // Loading text
         Text(
           'Loading amazing content...',
-          style: AppTypography.body2.withColor(Colors.white.withOpacity(0.8)),
+          style: AppTypography.withColor(AppTypography.body2, Colors.white.withValues(alpha: 0.8)),
         ),
       ],
     );
@@ -289,10 +289,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
   Future<bool> _checkLottieFile() async {
     try {
       // Check if the Lottie file exists
-      await precacheAsset(
-        Lottie.asset(AppConstants.loadingAnimation),
-        context,
-      );
+      final composition = await AssetLottie(AppConstants.loadingAnimation).load();
       return true;
     } catch (e) {
       return false;
@@ -304,16 +301,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
       children: [
         Text(
           'Version ${AppConstants.appVersion}',
-          style: AppTypography.caption2.withColor(
-            Colors.white.withOpacity(0.6),
-          ),
+          style: AppTypography.withColor(AppTypography.caption2, Colors.white.withValues(alpha: 0.6)),
         ),
         const SizedBox(height: 4),
         Text(
           'Made with ❤️',
-          style: AppTypography.caption2.withColor(
-            Colors.white.withOpacity(0.6),
-          ),
+          style: AppTypography.withColor(AppTypography.caption2, Colors.white.withValues(alpha: 0.6)),
         ),
       ],
     );

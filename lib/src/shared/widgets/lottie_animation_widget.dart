@@ -134,7 +134,7 @@ class _LottieAnimationWidgetState extends State<LottieAnimationWidget>
       width: widget.width,
       height: widget.height,
       decoration: BoxDecoration(
-        color: AppTheme.errorColor.withOpacity(0.1),
+        color: AppTheme.errorColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Center(
@@ -199,7 +199,7 @@ class _LottieAnimationWidgetState extends State<LottieAnimationWidget>
       width: widget.width,
       height: widget.height,
       decoration: BoxDecoration(
-        color: AppTheme.primaryColor.withOpacity(0.1),
+        color: AppTheme.primaryColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Center(
@@ -222,7 +222,7 @@ class _LottieAnimationWidgetState extends State<LottieAnimationWidget>
             const SizedBox(height: 8),
             Text(
               AppConstants.appName,
-              style: AppTypography.title2.withColor(AppTheme.primaryColor),
+              style: AppTypography.withColor(AppTypography.title2, AppTheme.primaryColor),
             ),
           ],
         );
@@ -453,7 +453,7 @@ class EmptyStateAnimation extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             message!,
-            style: AppTypography.body1.withColor(AppTheme.textSecondary),
+            style: AppTypography.withColor(AppTypography.body1, AppTheme.textSecondary),
             textAlign: TextAlign.center,
           ),
         ],

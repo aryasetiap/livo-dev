@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../core/constants/app_constants.dart';
-import '../../../../shared/providers/auth_provider.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/theme/app_typography.dart';
+import '../../../core/constants/app_constants.dart';
+import '../../../shared/providers/auth_provider.dart';
 
 class SignupScreen extends ConsumerStatefulWidget {
   const SignupScreen({super.key});
@@ -353,7 +353,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen>
         const SizedBox(height: 8),
         Text(
           'Join ${AppConstants.appName} and start sharing your moments',
-          style: AppTypography.body1.withColor(AppTheme.textSecondary),
+          style: AppTypography.withColor(AppTypography.body1, AppTheme.textSecondary),
         ),
       ],
     );
@@ -515,7 +515,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen>
                     onTap: _showTermsAndConditions,
                     child: Text(
                       'Terms and Conditions',
-                      style: AppTypography.body2.withColor(AppTheme.primaryColor),
+                      style: AppTypography.withColor(AppTypography.body2, AppTheme.primaryColor),
                     ),
                   ),
                 ),
@@ -525,7 +525,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen>
                     onTap: _showPrivacyPolicy,
                     child: Text(
                       'Privacy Policy',
-                      style: AppTypography.body2.withColor(AppTheme.primaryColor),
+                      style: AppTypography.withColor(AppTypography.body2, AppTheme.primaryColor),
                     ),
                   ),
                 ),
@@ -570,7 +570,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen>
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             'OR',
-            style: AppTypography.caption1.withColor(AppTheme.textSecondary),
+            style: AppTypography.withColor(AppTypography.caption1, AppTheme.textSecondary),
           ),
         ),
         const Expanded(child: Divider()),
@@ -618,7 +618,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen>
       children: [
         Text(
           'Already have an account? ',
-          style: AppTypography.body2.withColor(AppTheme.textSecondary),
+          style: AppTypography.withColor(AppTypography.body2, AppTheme.textSecondary),
         ),
         TextButton(
           onPressed: _navigateToLogin,

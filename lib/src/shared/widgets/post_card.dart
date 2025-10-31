@@ -383,7 +383,7 @@ class _PostCardState extends ConsumerState<PostCard> {
             Positioned.fill(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
+                  color: Colors.black.withValues(alpha: 0.6),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Center(
@@ -439,7 +439,7 @@ class _PostCardState extends ConsumerState<PostCard> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.7),
+                color: Colors.black.withValues(alpha: 0.7),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Text(
@@ -470,7 +470,7 @@ class _PostCardState extends ConsumerState<PostCard> {
 
   Widget _buildMediaErrorPlaceholder() {
     return Container(
-      color: AppTheme.errorColor.withOpacity(0.1),
+      color: AppTheme.errorColor.withValues(alpha: 0.1),
       child: const Center(
         child: Icon(
           Icons.broken_image,
@@ -493,7 +493,7 @@ class _PostCardState extends ConsumerState<PostCard> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
-                  color: _isLiked ? AppTheme.primaryColor.withOpacity(0.1) : Colors.transparent,
+                  color: _isLiked ? AppTheme.primaryColor.withValues(alpha: 0.1) : Colors.transparent,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(

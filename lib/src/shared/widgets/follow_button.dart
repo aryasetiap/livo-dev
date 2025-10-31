@@ -418,7 +418,7 @@ class FollowStatusChip extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: isFollowing ? AppTheme.successColor.withOpacity(0.1) : AppTheme.borderColor,
+        color: isFollowing ? AppTheme.successColor.withValues(alpha: 0.1) : AppTheme.borderColor,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: isFollowing ? AppTheme.successColor : AppTheme.borderColor,

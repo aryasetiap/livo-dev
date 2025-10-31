@@ -31,7 +31,7 @@ class LoadingWidget extends StatelessWidget {
         if (message != null) ...[
           Text(
             message!,
-            style: AppTypography.body2.withColor(
+            style: AppTypography.withColor(AppTypography.body2, (
               showBackground ? AppTheme.textPrimary : AppTheme.textSecondary,
             ),
             textAlign: TextAlign.center,
@@ -76,7 +76,7 @@ class LoadingOverlay extends StatelessWidget {
         child,
         if (isLoading)
           Container(
-            color: backgroundColor?.withOpacity(0.8) ?? Colors.black.withOpacity(0.5),
+            color: backgroundColor?.withValues(alpha: 0.8) ?? Colors.black.withValues(alpha: 0.5),
             child: Center(
               child: LoadingWidget(
                 message: message,

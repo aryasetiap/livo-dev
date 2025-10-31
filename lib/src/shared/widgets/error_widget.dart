@@ -202,7 +202,7 @@ class ErrorBanner extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -246,13 +246,13 @@ class ErrorBanner extends StatelessWidget {
   Color _getBackgroundColor() {
     switch (type) {
       case ErrorType.error:
-        return AppTheme.errorColor.withOpacity(0.1);
+        return AppTheme.errorColor.withValues(alpha: 0.1);
       case ErrorType.warning:
-        return AppTheme.warningColor.withOpacity(0.1);
+        return AppTheme.warningColor.withValues(alpha: 0.1);
       case ErrorType.info:
-        return AppTheme.infoColor.withOpacity(0.1);
+        return AppTheme.infoColor.withValues(alpha: 0.1);
       case ErrorType.success:
-        return AppTheme.successColor.withOpacity(0.1);
+        return AppTheme.successColor.withValues(alpha: 0.1);
     }
   }
 
@@ -346,10 +346,10 @@ class FormErrorWidget extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppTheme.errorColor.withOpacity(0.1),
+        color: AppTheme.errorColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: AppTheme.errorColor.withOpacity(0.3),
+          color: AppTheme.errorColor.withValues(alpha: 0.3),
         ),
       ),
       child: Row(

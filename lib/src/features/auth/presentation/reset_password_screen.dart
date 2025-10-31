@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../core/constants/app_constants.dart';
-import '../../../../shared/providers/auth_provider.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/theme/app_typography.dart';
+import '../../../core/constants/app_constants.dart';
+import '../../../shared/providers/auth_provider.dart';
 
 class ResetPasswordScreen extends ConsumerStatefulWidget {
   const ResetPasswordScreen({super.key});
@@ -170,7 +170,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen>
           width: 120,
           height: 120,
           decoration: BoxDecoration(
-            color: AppTheme.primaryColor.withOpacity(0.1),
+            color: AppTheme.primaryColor.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(60),
           ),
           child: Icon(
@@ -206,7 +206,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen>
                 _emailSent
                     ? 'We\'ve sent password reset instructions to your email'
                     : 'Enter your email address and we\'ll send you a link to reset your password',
-                style: AppTypography.body1.withColor(AppTheme.textSecondary),
+                style: AppTypography.withColor(AppTypography.body1, AppTheme.textSecondary),
               ),
             ],
           ),
@@ -272,7 +272,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen>
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: AppTheme.successColor.withOpacity(0.1),
+                  color: AppTheme.successColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(40),
                 ),
                 child: Icon(
@@ -294,7 +294,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen>
 
               Text(
                 'We\'ve sent a password reset link to\n${_emailController.text}',
-                style: AppTypography.body1.withColor(AppTheme.textSecondary),
+                style: AppTypography.withColor(AppTypography.body1, AppTheme.textSecondary),
                 textAlign: TextAlign.center,
               ),
 
@@ -302,7 +302,7 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen>
 
               Text(
                 'Didn\'t receive the email? Check your spam folder or try again.',
-                style: AppTypography.body2.withColor(AppTheme.textSecondary),
+                style: AppTypography.withColor(AppTypography.body2, AppTheme.textSecondary),
                 textAlign: TextAlign.center,
               ),
             ],

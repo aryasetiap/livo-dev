@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../shared/providers/feed_provider.dart';
-import '../../../../shared/providers/auth_provider.dart';
-import '../../../../shared/widgets/post_card.dart';
-import '../../../../shared/widgets/loading_widget.dart';
-import '../../../../shared/widgets/error_widget.dart';
-import '../../../../shared/widgets/follow_suggestion_widget.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/theme/app_typography.dart';
+import '../../../shared/providers/feed_provider.dart';
+import '../../../shared/providers/auth_provider.dart';
+import '../../../shared/models/user_model.dart';
+import '../../../shared/widgets/post_card.dart';
+import '../../../shared/widgets/loading_widget.dart';
+import '../../../shared/widgets/error_widget.dart';
 
 class FeedPage extends ConsumerStatefulWidget {
   const FeedPage({super.key});
@@ -50,7 +50,6 @@ class _FeedPageState extends ConsumerState<FeedPage> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    final feedState = ref.watch(feedProvider);
     final currentUser = ref.watch(currentUserProvider);
 
     return Scaffold(
@@ -75,7 +74,8 @@ class _FeedPageState extends ConsumerState<FeedPage> with SingleTickerProviderSt
         actions: [
           IconButton(
             onPressed: () {
-              // TODO: Navigate to notifications
+              // Navigate to notifications page
+              context.push('/notifications');
             },
             icon: const Badge(
               label: Text('3'),
@@ -84,7 +84,8 @@ class _FeedPageState extends ConsumerState<FeedPage> with SingleTickerProviderSt
           ),
           IconButton(
             onPressed: () {
-              // TODO: Navigate to messages
+              // Navigate to messages page
+              context.push('/messages');
             },
             icon: const Badge(
               label: Text('5'),
@@ -136,7 +137,7 @@ class _FeedPageState extends ConsumerState<FeedPage> with SingleTickerProviderSt
   }
 
   Widget _buildForYouFeed() {
-    // TODO: Implement "For You" algorithm-based feed
+    // Algorithm-based feed implementation (placeholder for now)
     return RefreshIndicator(
       onRefresh: () async {
         await ref.read(feedProvider.notifier).refreshFeed();
@@ -415,7 +416,7 @@ class _FeedPageState extends ConsumerState<FeedPage> with SingleTickerProviderSt
   }
 
   Widget _buildSuggestionsSection() {
-    // TODO: Replace with actual follow suggestions
+    // Follow suggestions section (placeholder - replace with actual suggestions)
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.all(16),
@@ -443,7 +444,8 @@ class _FeedPageState extends ConsumerState<FeedPage> with SingleTickerProviderSt
               const Spacer(),
               TextButton(
                 onPressed: () {
-                  // TODO: Navigate to discover page
+                  // Navigate to discover page to see more suggestions
+                  context.push('/discover');
                 },
                 child: const Text('See All'),
               ),
@@ -510,7 +512,7 @@ class _FeedPageState extends ConsumerState<FeedPage> with SingleTickerProviderSt
             width: double.infinity,
             height: 24,
             decoration: BoxDecoration(
-              color: AppTheme.primaryColor.withOpacity(0.1),
+              color: AppTheme.primaryColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
             ),
           ),

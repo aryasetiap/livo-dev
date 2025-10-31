@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../core/constants/app_constants.dart';
-import '../../../../shared/models/user_model.dart';
-import '../../../../shared/providers/profile_provider.dart';
-import '../../../../shared/providers/auth_provider.dart';
-import '../../../../shared/widgets/avatar_widget.dart';
-import '../../../../shared/widgets/loading_widget.dart';
-import '../../../../shared/widgets/error_widget.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/theme/app_typography.dart';
+import '../../../core/constants/app_constants.dart';
+import '../../../shared/models/user_model.dart';
+import '../../../shared/providers/profile_provider.dart';
+import '../../../shared/widgets/avatar_widget.dart';
+import '../../../shared/widgets/loading_widget.dart';
 
 class EditProfilePage extends ConsumerStatefulWidget {
   const EditProfilePage({super.key});
@@ -247,10 +244,10 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage>
             const SizedBox(height: 8),
             TextButton(
               onPressed: _removeProfilePhoto,
-              child: const Text('Remove Current Photo'),
               style: TextButton.styleFrom(
                 foregroundColor: AppTheme.errorColor,
               ),
+              child: const Text('Remove Current Photo'),
             ),
           ],
         ],
@@ -420,7 +417,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage>
           width: double.infinity,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: AppTheme.errorColor.withOpacity(0.1),
+            color: AppTheme.errorColor.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(

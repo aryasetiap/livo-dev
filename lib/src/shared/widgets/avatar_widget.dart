@@ -43,7 +43,7 @@ class AvatarWidget extends StatelessWidget {
         color: Color(UserExtensions(User.minimal(
           id: '',
           username: username,
-        )).avatarColorCode).withOpacity(0.1),
+        )).avatarColorCode).withValues(alpha: 0.1),
         border: showBorder
             ? Border.all(
                 color: avatarColor,
@@ -53,7 +53,7 @@ class AvatarWidget extends StatelessWidget {
         boxShadow: showShadow
             ? [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: 8,
                   offset: const Offset(0, 2),
                 ),
@@ -122,7 +122,7 @@ class AvatarWidget extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Color(user.avatarColorCode).withOpacity(0.2),
+        color: Color(user.avatarColorCode).withValues(alpha: 0.2),
       ),
       child: Center(
         child: Text(

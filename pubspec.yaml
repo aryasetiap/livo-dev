@@ -43,10 +43,12 @@ dependencies:
 
   # Supabase Integration
   supabase_flutter: ^2.3.4
+  supabase: ^2.0.8
 
   # Code Generation
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
+  equatable: ^2.0.5
 
   # Network & Image Handling
   cached_network_image: ^3.3.1

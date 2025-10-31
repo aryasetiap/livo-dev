@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'app_theme.dart';
 
 class AppTypography {
   // Font Family
@@ -332,5 +333,3 @@ extension TextStyles on TextStyle {
   TextStyle get withLineThrough => copyWith(decoration: TextDecoration.lineThrough);
 }
 
-// Import AppTheme for color references
-import 'app_theme.dart';

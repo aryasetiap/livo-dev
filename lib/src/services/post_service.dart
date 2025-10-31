@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/errors/app_exception.dart';
-import '../core/services/supabase_service.dart';
+import '../services/supabase_service.dart';
 import '../shared/models/post_model.dart';
 import '../shared/models/user_model.dart';
 

@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../core/errors/app_exception.dart';
-import '../core/services/supabase_service.dart';
+import '../services/supabase_service.dart';
 import '../shared/models/notification_model.dart';
-import '../shared/models/user_model.dart';
+import '../shared/models/user_model.dart' as app_models;
 
 class NotificationService {
   final SupabaseService _supabaseService;
@@ -51,7 +51,7 @@ class NotificationService {
   // Convenience methods for common notification types
   Future<Notification> createLikeNotification({
     required String userId,
-    required User actor,
+    required app_models.User actor,
     required String targetId,
     String targetType = 'post',
   }) async {

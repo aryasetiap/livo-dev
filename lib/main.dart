@@ -12,9 +12,6 @@ import 'src/features/auth/presentation/onboarding_screen.dart';
 import 'src/features/auth/presentation/login_screen.dart';
 import 'src/features/auth/presentation/signup_screen.dart';
 import 'src/features/auth/presentation/reset_password_screen.dart';
-import 'src/features/feed/presentation/feed_page.dart';
-import 'src/features/profile/presentation/profile_page.dart';
-import 'src/shared/providers/auth_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,8 +47,6 @@ class LivoApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authState = ref.watch(authProvider);
-
     return MaterialApp.router(
       title: AppConstants.appName,
       debugShowCheckedModeBanner: false,
@@ -106,11 +101,7 @@ final _router = GoRouter(
       name: 'home',
       builder: (context, state) => const FeedPage(),
       redirect: (context, state) {
-        final authState = context.read(authProvider);
-        if (!authState.isAuthenticated) {
-          return '/login';
-        }
-        return null;
+        return null; // TODO: Implement proper auth check
       },
     ),
 
@@ -122,29 +113,12 @@ final _router = GoRouter(
         return ProfilePage(userId: userId);
       },
       redirect: (context, state) {
-        final authState = context.read(authProvider);
-        if (!authState.isAuthenticated) {
-          return '/login';
-        }
-        return null;
+        return null; // TODO: Implement proper auth check
       },
     ),
   ],
   redirect: (context, state) {
-    final authState = context.read(authProvider);
-
-    // If user is not authenticated and not on auth routes, redirect to splash
-    if (!authState.isAuthenticated &&
-        !['/splash', '/onboarding', '/login', '/signup', '/reset-password'].contains(state.location.path)) {
-      return '/splash';
-    }
-
-    // If user is authenticated and on auth routes, redirect to home
-    if (authState.isAuthenticated &&
-        ['/login', '/signup', '/reset-password'].contains(state.location.path)) {
-      return '/home';
-    }
-
+    // TODO: Implement proper auth check
     return null;
   },
   errorBuilder: (context, state) => Scaffold(
@@ -152,20 +126,20 @@ final _router = GoRouter(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.error_outline,
             size: 64,
-            color: AppTheme.errorColor,
+            color: Colors.red,
           ),
           const SizedBox(height: 16),
-          Text(
+          const Text(
             'Oops! Something went wrong.',
-            style: AppTypography.h1,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
           Text(
             state.error.toString(),
-            style: AppTypography.body2.withColor(AppTheme.textSecondary),
+            style: const TextStyle(fontSize: 14, color: Colors.grey),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
@@ -207,17 +181,17 @@ class FeedPage extends StatelessWidget {
             Icon(
               Icons.home,
               size: 64,
-              color: AppTheme.primaryColor,
+              color: Colors.blue,
             ),
             SizedBox(height: 16),
             Text(
               'Welcome to Livo!',
-              style: AppTypography.h1,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
             Text(
               'Your feed is being built...',
-              style: AppTypography.body1,
+              style: TextStyle(fontSize: 16),
             ),
           ],
         ),
@@ -297,23 +271,22 @@ class ProfilePage extends StatelessWidget {
             const Icon(
               Icons.person,
               size: 64,
-              color: AppTheme.primaryColor,
+              color: Colors.blue,
             ),
             const SizedBox(height: 16),
-            Text(
+            const Text(
               'Profile Page',
-              style: AppTypography.h1,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(
               'User ID: $userId',
-              style: AppTypography.body2,
+              style: const TextStyle(fontSize: 14),
             ),
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
                 // TODO: Implement sign out
-                context.read(authProvider.notifier).signOut();
               },
               child: const Text('Sign Out'),
             ),

@@ -3,9 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/app_typography.dart';
-import '../../../core/constants/app_constants.dart';
-import '../../../shared/widgets/loading_widget.dart';
-import '../../../shared/widgets/error_widget.dart';
 
 class PostGridWidget extends ConsumerStatefulWidget {
   final String userId;
@@ -38,7 +35,7 @@ class _PostGridWidgetState extends ConsumerState<PostGridWidget> {
     super.dispose();
   }
 
-  void _loadPosts() async {
+  Future<void> _loadPosts() async {
     setState(() {
       _isLoading = true;
     });
@@ -138,7 +135,7 @@ class _PostGridWidgetState extends ConsumerState<PostGridWidget> {
           ),
           const SizedBox(height: 16),
           Text(
-            isEmptyMessage ?? 'No posts yet',
+            widget.isEmptyMessage ?? 'No posts yet',
             style: AppTypography.h1,
             textAlign: TextAlign.center,
           ),
@@ -192,7 +189,7 @@ class _PostGridWidgetState extends ConsumerState<PostGridWidget> {
           borderRadius: BorderRadius.circular(4),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 2,
               offset: const Offset(0, 1),
             ),
@@ -225,7 +222,7 @@ class _PostGridWidgetState extends ConsumerState<PostGridWidget> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.6),
+                      color: Colors.black.withValues(alpha: 0.6),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
@@ -258,7 +255,7 @@ class _PostGridWidgetState extends ConsumerState<PostGridWidget> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.6),
+                      color: Colors.black.withValues(alpha: 0.6),
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: const Row(
@@ -358,7 +355,7 @@ class _PostGridWidgetState extends ConsumerState<PostGridWidget> {
 
   Widget _buildErrorPlaceholder() {
     return Container(
-      color: AppTheme.errorColor.withOpacity(0.1),
+      color: AppTheme.errorColor.withValues(alpha: 0.1),
       child: const Center(
         child: Icon(
           Icons.broken_image,
@@ -371,7 +368,7 @@ class _PostGridWidgetState extends ConsumerState<PostGridWidget> {
 
   String _formatCount(int count) {
     if (count >= 1000000) {
-      return '${(Count / 1000000).toStringAsFixed(1)}M';
+      return '${(count / 1000000).toStringAsFixed(1)}M';
     } else if (count >= 1000) {
       return '${(count / 1000).toStringAsFixed(1)}K';
     }
@@ -428,7 +425,7 @@ class PostGridItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(4),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 2,
               offset: const Offset(0, 1),
             ),
@@ -465,7 +462,7 @@ class PostGridItem extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.6),
+                            color: Colors.black.withValues(alpha: 0.6),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Row(
@@ -493,7 +490,7 @@ class PostGridItem extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.6),
+                            color: Colors.black.withValues(alpha: 0.6),
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: const Row(
@@ -548,7 +545,7 @@ class PostGridItem extends StatelessWidget {
 
   Widget _buildErrorPlaceholder() {
     return Container(
-      color: AppTheme.errorColor.withOpacity(0.1),
+      color: AppTheme.errorColor.withValues(alpha: 0.1),
       child: const Center(
         child: Icon(
           Icons.broken_image,

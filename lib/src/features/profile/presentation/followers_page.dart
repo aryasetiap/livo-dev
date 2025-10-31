@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../shared/models/user_model.dart';
-import '../../../../shared/providers/profile_provider.dart';
-import '../../../../shared/widgets/loading_widget.dart';
-import '../../../../shared/widgets/error_widget.dart';
-import '../../../../shared/widgets/avatar_widget.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/theme/app_typography.dart';
+import '../../../shared/models/user_model.dart';
+import '../../../shared/providers/profile_provider.dart';
+import '../../../shared/widgets/loading_widget.dart';
+import '../../../shared/widgets/error_widget.dart';
+import '../../../shared/widgets/avatar_widget.dart';
 
 class FollowersPage extends ConsumerWidget {
   final String userId;

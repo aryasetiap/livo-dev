@@ -445,8 +445,8 @@ class TrendingUsers extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              cardColor.withOpacity(0.8),
-              cardColor.withOpacity(0.6),
+              cardColor.withValues(alpha: 0.8),
+              cardColor.withValues(alpha: 0.6),
             ],
           ),
         ),

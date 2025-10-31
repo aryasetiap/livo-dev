@@ -1,11 +1,12 @@
-import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:supabase/supabase.dart';
 import '../core/constants/app_constants.dart';
+import '../core/config/environment_config.dart';
 
 class SupabaseService {
   static SupabaseClient? _client;
   static SupabaseService? _instance;
+  final EnvironmentConfig _env = EnvironmentConfig.instance;
 
   SupabaseService._();
 
@@ -28,8 +29,6 @@ class SupabaseService {
         authOptions: const FlutterAuthClientOptions(
           authFlowType: AuthFlowType.pkce,
           autoRefreshToken: true,
-          persistSession: true,
-          localStorage: SharedPreferencesLocalStorage(),
         ),
         realtimeClientOptions: const RealtimeClientOptions(
           eventsPerSecond: 40,
@@ -38,24 +37,25 @@ class SupabaseService {
           retryAttempts: 3,
         ),
       );
-      print('Supabase initialized successfully');
+      debugPrint('Supabase initialized successfully');
     } catch (e) {
-      print('Error initializing Supabase: $e');
+      debugPrint('Error initializing Supabase: $e');
       rethrow;
     }
   }
 
   // Auth related methods
-  Auth get auth => client.auth;
+  dynamic get auth => client.auth;
 
   // Database related methods
-  PostgrestClient get database => client.from;
+  dynamic from(String tableName) => client.from(tableName);
+  dynamic database(String tableName) => client.from(tableName);
 
   // Storage related methods
   SupabaseStorageClient get storage => client.storage;
 
   // Realtime subscriptions
-  RealtimeChannel get channel(String name) => client.channel(name);
+  RealtimeChannel channel(String name) => client.channel(name);
 
   // Convenience methods for common operations
 
@@ -97,7 +97,7 @@ class SupabaseService {
 
       return response;
     } catch (e) {
-      print('Error signing up: $e');
+      debugPrint('Error signing up: $e');
       rethrow;
     }
   }
@@ -113,7 +113,7 @@ class SupabaseService {
         password: password,
       );
     } catch (e) {
-      print('Error signing in: $e');
+      debugPrint('Error signing in: $e');
       rethrow;
     }
   }
@@ -122,14 +122,14 @@ class SupabaseService {
   Future<AuthResponse> signInWithGoogle() async {
     try {
       return await auth.signInWithOAuth(
-        Provider.google,
+        OAuthProvider.google,
         redirectTo: 'io.supabase.flutter://callback',
         queryParams: {
           'access_type': 'offline',
         },
       );
     } catch (e) {
-      print('Error signing in with Google: $e');
+      debugPrint('Error signing in with Google: $e');
       rethrow;
     }
   }
@@ -139,7 +139,7 @@ class SupabaseService {
     try {
       await auth.signOut();
     } catch (e) {
-      print('Error signing out: $e');
+      debugPrint('Error signing out: $e');
       rethrow;
     }
   }
@@ -149,7 +149,7 @@ class SupabaseService {
     try {
       await auth.resetPasswordForEmail(email);
     } catch (e) {
-      print('Error resetting password: $e');
+      debugPrint('Error resetting password: $e');
       rethrow;
     }
   }
@@ -178,7 +178,7 @@ class SupabaseService {
 
       // Update profile in database
       if (currentUser?.id != null) {
-        await database('profiles').update({
+        await from('profiles').update({
           if (username != null) 'username': username,
           if (displayName != null) 'display_name': displayName,
           if (bio != null) 'bio': bio,
@@ -190,7 +190,7 @@ class SupabaseService {
 
       return authResponse;
     } catch (e) {
-      print('Error updating profile: $e');
+      debugPrint('Error updating profile: $e');
       rethrow;
     }
   }
@@ -203,7 +203,7 @@ class SupabaseService {
     Map<String, dynamic>? metadata,
   }) async {
     try {
-      await database('profiles').insert({
+      await from('profiles').insert({
         'id': userId,
         'email': email,
         'username': username ?? email.split('@')[0],
@@ -214,7 +214,7 @@ class SupabaseService {
         'updated_at': DateTime.now().toIso8601String(),
       });
     } catch (e) {
-      print('Error creating user profile: $e');
+      debugPrint('Error creating user profile: $e');
       // Don't rethrow here as the user is already created in auth
     }
   }
@@ -237,11 +237,12 @@ class SupabaseService {
       );
       return response;
     } catch (e) {
-      print('Error uploading file: $e');
+      _env.logError('Error uploading file: $e', tag: 'SupabaseService');
       rethrow;
     }
   }
 
+  
   // Get public URL for file
   String getPublicUrl(String bucket, String path) {
     return storage.from(bucket).getPublicUrl(path);
@@ -255,7 +256,7 @@ class SupabaseService {
     try {
       await storage.from(bucket).remove([path]);
     } catch (e) {
-      print('Error deleting file: $e');
+      _env.logError('Error deleting file: $e', tag: 'SupabaseService');
       rethrow;
     }
   }
@@ -270,10 +271,9 @@ class SupabaseService {
     final channel = client.channel('public:$tableName');
 
     channel.onPostgresChanges(
-      event: event,
+      event: PostgresChangeEvent.all,
       schema: 'public',
       table: tableName,
-      filter: filter,
       callback: (payload) => callback(payload),
     );
 

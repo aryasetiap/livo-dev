@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../core/constants/app_constants.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/theme/app_typography.dart';
+import '../../../core/constants/app_constants.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
@@ -106,9 +106,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen>
                     onPressed: _skipOnboarding,
                     child: Text(
                       'Skip',
-                      style: AppTypography.buttonMedium.withColor(
-                        AppTheme.textSecondary,
-                      ),
+                      style: AppTypography.withColor(AppTypography.buttonMedium, AppTheme.textSecondary),
                     ),
                   ),
                 ),
@@ -284,7 +282,7 @@ class OnboardingPage extends StatelessWidget {
             },
             child: Text(
               item.description,
-              style: AppTypography.body1.withColor(AppTheme.textSecondary),
+              style: AppTypography.withColor(AppTypography.body1, AppTheme.textSecondary),
               textAlign: TextAlign.center,
             ),
           ),
@@ -320,10 +318,7 @@ class OnboardingPage extends StatelessWidget {
 
   Future<bool> _checkLottieFile() async {
     try {
-      await precacheAsset(
-        Lottie.asset(item.animationPath),
-        context,
-      );
+      final composition = await AssetLottie(item.animationPath).load();
       return true;
     } catch (e) {
       return false;
@@ -335,7 +330,7 @@ class OnboardingPage extends StatelessWidget {
       width: 200,
       height: 200,
       decoration: BoxDecoration(
-        color: AppTheme.primaryColor.withOpacity(0.1),
+        color: AppTheme.primaryColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(100),
       ),
       child: Icon(

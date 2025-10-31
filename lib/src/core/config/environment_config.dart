@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'supabase_config.dart';
+import '../constants/app_constants.dart';
 
 class EnvironmentConfig {
   static EnvironmentConfig? _instance;
@@ -102,36 +103,36 @@ class EnvironmentConfig {
   void log(String message, {String? tag}) {
     if (enableDebugLogging) {
       final prefix = tag != null ? '[$tag] ' : '';
-      print('🔧 $prefix$message');
+      debugPrint('🔧 $prefix$message');
     }
   }
 
   void logError(String error, {String? tag, StackTrace? stackTrace}) {
     final prefix = tag != null ? '[$tag] ' : '';
-    print('❌ $prefix$error');
+    debugPrint('❌ $prefix$error');
     if (stackTrace != null && enableDebugLogging) {
-      print('Stack trace: $stackTrace');
+      debugPrint('Stack trace: $stackTrace');
     }
   }
 
   void logNetwork(String method, String url, {int? statusCode, dynamic body}) {
     if (enableNetworkLogging) {
       final status = statusCode != null ? ' [$statusCode]' : '';
-      print('🌐 $method $url$status');
+      debugPrint('🌐 $method $url$status');
       if (body != null && enableDebugLogging) {
-        print('Response: $body');
+        debugPrint('Response: $body');
       }
     }
   }
 
   void logPerformance(String operation, Duration duration) {
     if (enablePerformanceMonitoring) {
-      print('⏱️ $operation took ${duration.inMilliseconds}ms');
+      debugPrint('⏱️ $operation took ${duration.inMilliseconds}ms');
     }
   }
 
   // Environment-specific feature flags
-  bool get isFeatureEnabled(String feature) {
+  bool isFeatureEnabled(String feature) {
     // Feature flags can be controlled per environment
     switch (feature) {
       case 'stories':

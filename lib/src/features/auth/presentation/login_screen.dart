@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../core/theme/app_typography.dart';
-import '../../../../core/constants/app_constants.dart';
-import '../../../../shared/providers/auth_provider.dart';
+import '../../../core/theme/app_theme.dart';
+import '../../../core/theme/app_typography.dart';
+import '../../../core/constants/app_constants.dart';
+import '../../../shared/providers/auth_provider.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -256,7 +256,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
         const SizedBox(height: 8),
         Text(
           'Sign in to continue to ${AppConstants.appName}',
-          style: AppTypography.body1.withColor(AppTheme.textSecondary),
+          style: AppTypography.withColor(AppTypography.body1, AppTheme.textSecondary),
         ),
       ],
     );
@@ -373,7 +373,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             'OR',
-            style: AppTypography.caption1.withColor(AppTheme.textSecondary),
+            style: AppTypography.withColor(AppTypography.caption1, AppTheme.textSecondary),
           ),
         ),
         const Expanded(child: Divider()),
@@ -421,7 +421,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
       children: [
         Text(
           'Don\'t have an account? ',
-          style: AppTypography.body2.withColor(AppTheme.textSecondary),
+          style: AppTypography.withColor(AppTypography.body2, AppTheme.textSecondary),
         ),
         TextButton(
           onPressed: _navigateToSignup,

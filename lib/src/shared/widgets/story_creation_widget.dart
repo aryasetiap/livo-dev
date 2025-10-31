@@ -120,9 +120,9 @@ class _StoryCreationWidgetState extends ConsumerState<StoryCreationWidget> {
                         width: double.infinity,
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: AppTheme.errorColor.withOpacity(0.1),
+                          color: AppTheme.errorColor.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: AppTheme.errorColor.withOpacity(0.3)),
+                          border: Border.all(color: AppTheme.errorColor.withValues(alpha: 0.3)),
                         ),
                         child: Row(
                           children: [
@@ -244,7 +244,7 @@ class _StoryCreationWidgetState extends ConsumerState<StoryCreationWidget> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.7),
+                          color: Colors.black.withValues(alpha: 0.7),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
@@ -274,7 +274,7 @@ class _StoryCreationWidgetState extends ConsumerState<StoryCreationWidget> {
               child: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
+                  color: Colors.black.withValues(alpha: 0.6),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
@@ -292,7 +292,7 @@ class _StoryCreationWidgetState extends ConsumerState<StoryCreationWidget> {
               child: GestureDetector(
                 onTap: _showMediaPicker,
                 child: Container(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withValues(alpha: 0.3),
                   child: const Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -575,7 +575,7 @@ class _StoryCreationWidgetState extends ConsumerState<StoryCreationWidget> {
                         width: 48,
                         height: 48,
                         decoration: BoxDecoration(
-                          color: AppTheme.primaryColor.withOpacity(0.1),
+                          color: AppTheme.primaryColor.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Icon(
@@ -597,7 +597,7 @@ class _StoryCreationWidgetState extends ConsumerState<StoryCreationWidget> {
                         width: 48,
                         height: 48,
                         decoration: BoxDecoration(
-                          color: AppTheme.primaryColor.withOpacity(0.1),
+                          color: AppTheme.primaryColor.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Icon(
