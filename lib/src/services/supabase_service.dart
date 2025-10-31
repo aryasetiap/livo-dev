@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:supabase/supabase.dart';
 import '../core/constants/app_constants.dart';
@@ -310,7 +311,3 @@ class SupabaseService {
     _instance = null;
   }
 }
-
-// Import required types
-import 'dart:typed_data';
-import 'package:supabase_auth_helpers/supabase_auth_helpers.dart';

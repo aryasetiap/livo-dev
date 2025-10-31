@@ -1,3 +1,5 @@
+import 'app_theme.dart';
+
 class AppConstants {
   // App Information
   static const String appName = 'Livo';
@@ -204,6 +206,3 @@ class AppConstants {
   // Private constructor to prevent instantiation
   AppConstants._();
 }
-
-// Import AppTheme for color references
-import 'app_theme.dart';
